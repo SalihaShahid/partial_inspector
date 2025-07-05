@@ -13,7 +13,7 @@ module PartialInspector
             lines << {
               file: file,
               line_number: index + 1,
-              line_content: line.strip
+              line_content: highlight_partial_from_content(partial_path, line.strip)
             }
           end
         end
@@ -93,13 +93,23 @@ module PartialInspector
             lines << {
               file: file,
               line_number: index + 1,
-              line_content: line.strip
+              line_content: highlight_partial_from_content(partial_name, line.strip)
             }
           end
         end
       end
 
       lines
+    end
+
+    def highlight_partial_from_content(partial_path, content)
+      if content.include?("'#{partial_path}'")
+        content_components = content.split("'#{partial_path}'")
+        return content_components[0]+"\e[44m\e[32m'#{partial_path}'\e[0m\e[0m"+content_components[1]
+      elsif content.include?("\"#{partial_path}\"")
+        content_components = content.split("\"#{partial_path}\"")
+        return content_components[0]+"\e[44m\e[32m\"#{partial_path}\"\e[0m\e[0m"+content_components[1]
+      end
     end
   end
 end
