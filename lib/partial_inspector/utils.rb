@@ -2,7 +2,7 @@ module PartialInspector
   module Utils
     private
     def base_scanner(partial_path)
-      return "Invalid path" if partial_path.nil? || partial_path == ''
+      return [] if partial_path.nil? || partial_path == ''
       lines = []
 
       files = Dir.glob("app/**/*.{rb,html.erb,js.erb,turbo_stream.erb}")
