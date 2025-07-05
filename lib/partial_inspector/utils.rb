@@ -1,22 +1,28 @@
 module PartialInspector
   module Utils
-    BASE_DIR = "."
-
     private
     def base_scanner(partial_path)
+      return "Invalid path" if partial_path.nil? || partial_path == ''
       lines = []
 
-      files = Dir.glob("./app/**/*.{rb,html.erb,js.erb,turbo_stream.erb}")
+      files = Dir.glob("app/**/*.{rb,html.erb,js.erb,turbo_stream.erb}")
       files.each do |file|
         file_content = File.readlines(file)
         file_content.each_with_index do |line, index|
           if (line.include?('render') || line.include?('partial:')) && check_partial_exists(line, partial_path)
-            lines << "#{file}:#{index + 1}: #{line.strip}"
+            lines << {
+              file: file,
+              line_number: index + 1,
+              line_content: line.strip
+            }
           end
         end
       end
 
-      lines
+      partial_dir = build_partial_base_dir_path(partial_path)
+      partial_name =  extract_partial_name(partial_path)
+
+      lines + check_partial_against_name(partial_dir, partial_name)
     end
 
     def extract_partial_file_name(partial_path)
@@ -49,14 +55,51 @@ module PartialInspector
       if partial_path[0] == "\""
         partial_path = partial_path[1..-2]
         partial_path = partial_path[0..-2] if partial_path[-1] == '"'
-      end
-
-      if partial_path[0] == "'"
+      elsif partial_path[0] == "'"
         partial_path = partial_path[1..-2]
         partial_path = partial_path[0..-2] if partial_path[-1] == "'"
       end
 
       partial_path == partial
+    end
+  
+    def build_path(path_components)
+      path = ''
+      path_components.each do |path_component|
+        path = path+"#{path_component}/"
+      end
+  
+      path[0..-2]
+    end
+
+    def build_partial_base_dir_path(partial_path)
+      path_components = partial_path.split('/')
+      path = ''
+      path_components = path_components[0..-2]
+      path_components.each do |path_component|
+        path = path + "#{path_component}/"
+      end
+
+      path
+    end
+
+    def check_partial_against_name(partial_dir, partial_name)
+      lines = []
+      
+      Dir.glob("app/views/#{partial_dir}*.*.erb").each do |file|
+        file_content = File.readlines(file)
+        file_content.each_with_index do |line, index|
+          if line.include?('render') && check_partial_exists(line, partial_name)
+            lines << {
+              file: file,
+              line_number: index + 1,
+              line_content: line.strip
+            }
+          end
+        end
+      end
+
+      lines
     end
   end
 end
