@@ -11,16 +11,16 @@ module PartialInspector
       search_results_count = files.size
       grouped_files = combine_unique_files(files)
 
-      puts "\n\e[43mSEARCH SUMMARY\e[0m"
-      puts "TOTAL SEARCH RESULTS: \e[32m#{search_results_count}\e[0m"
-      puts "TOTAL FILES: \e[32m#{grouped_files.keys.size}\e[0m"
+      puts "\n\e[36mSEARCH SUMMARY\e[0m"
+      puts "\e[35mTOTAL SEARCH RESULTS\e[0m: \e[32m#{search_results_count}\e[0m"
+      puts "\e[35mTOTAL FILES\e[0m: \e[32m#{grouped_files.keys.size}\e[0m"
 
-      puts "\n\e[43mDETAILS\e[0m"
+      puts "\n\e[36mDETAILS\e[0m"
       grouped_files.each do |key, value|
-        puts "FILE NAME: \e[34m#{key.to_s}\e[0m"
+        puts "\e[35mFILE NAME\e[0m: \e[34m#{key.to_s}\e[0m"
         file_contents = value
         file_contents.each do |file_content|
-          puts "LINE #{file_content[:line_number]}: #{file_content[:line_content]} "
+          puts "\e[35mLINE #{file_content[:line_number]}\e[0m: #{file_content[:line_content]} "
         end
         puts "RENDERED \e[32m#{file_contents.size} TIME(S)\e[0m\n\n"
       end
