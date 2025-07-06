@@ -13,7 +13,7 @@ module PartialInspector
             lines << {
               file: file,
               line_number: index + 1,
-              line_content: highlight_partial_from_content(partial_path, line.strip)
+              line_content: highlight_partial_form_content(partial_path, line.strip)
             }
           end
         end
@@ -93,7 +93,7 @@ module PartialInspector
             lines << {
               file: file,
               line_number: index + 1,
-              line_content: highlight_partial_from_content(partial_name, line.strip)
+              line_content: highlight_partial_form_content(partial_name, line.strip)
             }
           end
         end
@@ -102,7 +102,7 @@ module PartialInspector
       lines
     end
 
-    def highlight_partial_from_content(partial_path, content)
+    def highlight_partial_form_content(partial_path, content)
       if content.include?("'#{partial_path}'")
         content_components = content.split("'#{partial_path}'")
         result = if content_components.size < 2
