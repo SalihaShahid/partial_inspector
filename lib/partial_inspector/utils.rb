@@ -105,10 +105,20 @@ module PartialInspector
     def highlight_partial_from_content(partial_path, content)
       if content.include?("'#{partial_path}'")
         content_components = content.split("'#{partial_path}'")
-        return content_components[0]+"\e[44m\e[32m'#{partial_path}'\e[0m\e[0m"+content_components[1]
+        result = if content_components.size < 2
+                  content_components[0]+"\e[44m\e[32m'#{partial_path}'\e[0m\e[0m"
+                 else
+                  content_components[0]+"\e[44m\e[32m'#{partial_path}'\e[0m\e[0m"+content_components[1]
+                 end
+        return result
       elsif content.include?("\"#{partial_path}\"")
         content_components = content.split("\"#{partial_path}\"")
-        return content_components[0]+"\e[44m\e[32m\"#{partial_path}\"\e[0m\e[0m"+content_components[1]
+        result = if content_components.size < 2
+                  content_components[0]+"\e[44m\e[32m\"#{partial_path}\"\e[0m\e[0m"
+                 else
+                  content_components[0]+"\e[44m\e[32m\"#{partial_path}\"\e[0m\e[0m"+content_components[1]
+                 end
+        return result
       end
     end
   end
