@@ -35,8 +35,8 @@ module PartialInspector
 
       puts "\n\e[36mSEARCH SUMMARY\e[0m"
       puts "\e[35mTOTAL PARTIALS\e[0m: \e[32m#{partials[:total_partials]}\e[0m"
-      puts "\e[35mUSED PARTIALS\e[0m: \e[32m#{unused_partials.size}\e[0m"
-      puts "\e[35mUNUSED PARTIALS\e[0m: \e[32m#{partials[:used_partials]}\e[0m"
+      puts "\e[35mUSED PARTIALS\e[0m: \e[32m#{partials[:used_partials]}\e[0m"
+      puts "\e[35mUNUSED PARTIALS\e[0m: \e[32m#{unused_partials.size}\e[0m"
        
       unless unused_partials.empty?
         puts "\n\e[36mDETAILS\e[0m"
