@@ -21,4 +21,4 @@ require "partial_inspector"
    
    ```
 PartialInspector.scanner.inspect_files_rendering_partial('path/to/partial')
-  ```
+   ```
