@@ -13,17 +13,17 @@ gem install partial_inspector
 ## How it works?
 1. Open irb
 2. Require the gem:
-   
- ```
-require "partial_inspector"
-  ```
+      
+    ```
+   require "partial_inspector"
+     ```
 
 ### Find where a partial is used
 1. Run the scanner:
-   
-```
-PartialInspector.scanner.inspect_files_rendering_partial('path/to/partial')
-```
+      
+   ```
+   PartialInspector.scanner.inspect_files_rendering_partial('path/to/partial')
+   ```
 2. Example Output
    
    <img width="803" alt="image" src="https://github.com/user-attachments/assets/9008c2c1-d6ea-4497-945b-1e47823208fc" />
@@ -31,9 +31,9 @@ PartialInspector.scanner.inspect_files_rendering_partial('path/to/partial')
 ### Find unused partials
 1. Run the scanner:
    
-```
-PartialInspector.scanner.scan_unused_partials
-```
+   ```
+   PartialInspector.scanner.scan_unused_partials
+   ```
 
 
 
