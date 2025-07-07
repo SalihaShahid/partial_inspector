@@ -8,6 +8,11 @@ module PartialInspector
       return
     end
 
+    def scan_unused_partials
+      puts reporter.report_unused_partials
+      return
+    end
+
     private
     def reporter
       PartialInspector::Reporter.new

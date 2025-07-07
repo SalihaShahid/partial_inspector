@@ -1,8 +1,10 @@
-require_relative "utils"
+require_relative "used_partials"
+require_relative "unused_partials"
 
 module PartialInspector
   class Reporter
-    include PartialInspector::Utils
+    include PartialInspector::UsedPartials
+    include PartialInspector::UnusedPartials
 
     def report_files_rendering_partial(partial_path)
       files = base_scanner(partial_path)
@@ -27,24 +29,19 @@ module PartialInspector
       return
     end
 
-    private
-    def combine_unique_files(files)
-      results = {}
-      files.each do |file|
-        same_files = files.filter { |f| f[:file] == file[:file] }
+    def report_unused_partials
+      partials = inspect_unused_partials
+      unused_partials = partials[:unused_partials]
 
-        same_files.each do |same_file|
-          files.delete(same_file)
-          results[same_file[:file].to_sym] = [] if results[same_file[:file].to_sym] == nil
-          results[same_file[:file].to_sym] << { line_number: same_file[:line_number], line_content: file[:line_content] }
-        end
+      puts "\n\e[36mSEARCH SUMMARY\e[0m"
+      puts "\e[35mTOTAL PARTIALS\e[0m: \e[32m#{partials[:total_partials]}\e[0m"
+      puts "\e[35mUSED PARTIALS\e[0m: \e[32m#{unused_partials.size}\e[0m"
+      puts "\e[35mUNUSED PARTIALS\e[0m: \e[32m#{partials[:used_partials]}\e[0m"
+      
+      unused_partials.each do |partial|
+        puts partial
       end
-
-      files.each do |file|
-        results[file[:file].to_sym] = [{ line_number: file[:line_number], line_content: file[:line_content] }]
-      end
-
-      results
+      return
     end
   end
 end

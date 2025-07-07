@@ -5,7 +5,6 @@ require_relative "partial_inspector/scanner"
 
 module PartialInspector
   class Error < StandardError; end
-  # Your code goes here...
 
   def self.scanner()
     PartialInspector::Scanner.new
