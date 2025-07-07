@@ -17,12 +17,23 @@ gem install partial_inspector
  ```
 require "partial_inspector"
   ```
-3. Run the scanner:
+
+### Find where a partial is used
+1. Run the scanner:
    
 ```
 PartialInspector.scanner.inspect_files_rendering_partial('path/to/partial')
 ```
-4. Example Output
+2. Example Output
    
    <img width="803" alt="image" src="https://github.com/user-attachments/assets/9008c2c1-d6ea-4497-945b-1e47823208fc" />
+
+### Find unused partials
+1. Run the scanner:
+   
+```
+PartialInspector.scanner.scan_unused_partials
+```
+
+
 
