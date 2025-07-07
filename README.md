@@ -19,6 +19,6 @@ require "partial_inspector"
   ```
 3. Run the scanner:
    
-   ```
+```
 PartialInspector.scanner.inspect_files_rendering_partial('path/to/partial')
-   ```
+```
