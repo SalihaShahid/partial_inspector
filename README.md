@@ -34,6 +34,10 @@ gem install partial_inspector
    ```
    PartialInspector.scanner.scan_unused_partials
    ```
+2. Example Output
+
+   <img width="606" height="263" alt="image" src="https://github.com/user-attachments/assets/f7aef983-be65-4167-9703-810f29631a95" />
+
 
 
 
