@@ -11,7 +11,7 @@ module PartialInspector
       unused_partials = []
       puts "\e[32mScanning...\e[0m\n"
       partial_paths_data.each do |path_data|
-        unless full_path_used(path_data[:full_path]) || partial_name_used(path_data[:partial_name])
+        unless full_path_used(path_data[:full_path]) || partial_name_used(path_data[:full_path])
           unused_partials << path_data[:partial]
         end
       end
@@ -67,6 +67,7 @@ module PartialInspector
           return true if line.include?("'#{partial_name}'") || line.include?("\"#{partial_name}\"") 
         end
       end
+      return false
     end
   end
 end
