@@ -45,4 +45,7 @@ gem install partial_inspector
    PartialInspector.scanner.inspect_partial_tree('path/to/partial')
    ```
 2. Example Output
+   
+   <img width="739" height="215" alt="image" src="https://github.com/user-attachments/assets/4ddfb898-70c5-4bf2-b849-96b51a741c20" />
+
 
