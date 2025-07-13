@@ -38,6 +38,11 @@ gem install partial_inspector
 
    <img width="606" height="263" alt="image" src="https://github.com/user-attachments/assets/f7aef983-be65-4167-9703-810f29631a95" />
 
-
-
+### Find partial tree
+1. Run the scanner:
+   
+   ```
+   PartialInspector.scanner.inspect_partial_tree('path/to/partial')
+   ```
+2. Example Output
 
