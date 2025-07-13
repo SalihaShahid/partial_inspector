@@ -1,10 +1,12 @@
 require_relative "used_partials"
 require_relative "unused_partials"
+require_relative "partial_tree"
 
 module PartialInspector
   class Reporter
     include PartialInspector::UsedPartials
     include PartialInspector::UnusedPartials
+    include PartialInspector::PartialTree
 
     def report_files_rendering_partial(partial_path)
       files = base_scanner(partial_path)
@@ -43,6 +45,21 @@ module PartialInspector
         unused_partials.each do |partial|
           puts partial
         end
+      end
+      return
+    end
+
+    def report_partial_tree(partial_path)
+      paths = data_to_build_tree(partial_path)
+      paths.each_with_index do |path, index|
+          puts "\e[35mTREE #{index+1}\e[0m"
+          space = ""
+          path[1..-1].each do |sub_path|
+            puts "#{space}-> #{sub_path}"
+            space = space + "\t"
+          end
+          space=""
+          puts "\n"
       end
       return
     end

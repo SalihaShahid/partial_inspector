@@ -29,32 +29,6 @@ module PartialInspector
       lines + check_partial_against_name(partial_dir, partial_name)
     end
 
-    def check_partial_exists(line, partial)
-      partial_path = ""
-      line_content = line.split(' ')
-      line_content.each_with_index do |value, index|
-        if line.include?("render partial:") && value == "render"
-          partial_path = line_content[index + 2]
-          break
-        elsif value == "render"
-          partial_path = line_content[index + 1]
-          break
-        elsif value == "partial:"
-          partial_path = line_content[index + 1]
-          break
-        end
-      end
-      if partial_path[0] == "\""
-        partial_path = partial_path[1..-2]
-        partial_path = partial_path[0..-2] if partial_path[-1] == '"'
-      elsif partial_path[0] == "'"
-        partial_path = partial_path[1..-2]
-        partial_path = partial_path[0..-2] if partial_path[-1] == "'"
-      end
-
-      partial_path == partial
-    end
-  
     def build_path(path_components)
       path = ''
       path_components.each do |path_component|

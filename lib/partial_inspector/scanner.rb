@@ -13,6 +13,11 @@ module PartialInspector
       return
     end
 
+    def inspect_partial_tree(partial_path)
+      puts reporter.report_partial_tree(partial_path)
+      return
+    end
+
     private
     def reporter
       PartialInspector::Reporter.new
